@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Auth = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const navigate = useNavigate();
   const [isSignup, setIsSignup] = useState(false);
   const [isForgotPassword, setIsForgotPassword] = useState(false);
@@ -25,7 +27,7 @@ const Auth = () => {
       if (token) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         try {
-          const res = await axios.get('http://localhost:8000/api/users/current');
+          const res = await axios.get(`${backendUrl}/api/users/current`, { withCredentials: true });
           if (res.data && res.data.user) {
             navigate('/dashboard');
           }
@@ -78,7 +80,7 @@ const Auth = () => {
 
     if (isForgotPassword) {
       try {
-        await axios.post('http://localhost:8000/api/users/forgot-password', { email: form.email });
+        await axios.post(`${backendUrl}/api/users/forgot-password`, { email: form.email });
         setSuccessMessage('If an account with that email exists, a password reset link has been sent. Please check your inbox.');
         switchToLogin();
       } catch (err) {
@@ -96,7 +98,7 @@ const Auth = () => {
           year: Number(form.year),
           mobile: Number(form.mobile),
         };
-        await axios.post('http://localhost:8000/api/users/signup', payload);
+        await axios.post(`${backendUrl}/api/users/signup`, payload);
         setSuccessMessage('Signup successful! Please verify your account via email and then login.');
       } catch (err) {
         if (err.response && err.response.status === 409) {
@@ -110,7 +112,11 @@ const Auth = () => {
     } else {
       try {
         const { email, password } = form;
-        const res = await axios.post('http://localhost:8000/api/users/signin', { email, password });
+        const res = await axios.post(
+          `${backendUrl}/api/users/signin`,
+          { email, password },
+          { withCredentials: true }
+        );
 
         const { token } = res.data;
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;

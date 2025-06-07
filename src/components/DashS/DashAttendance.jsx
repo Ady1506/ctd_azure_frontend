@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const DashAttendance = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const navigate = useNavigate();
   const [attendanceData, setAttendanceData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,7 +13,7 @@ const DashAttendance = () => {
   useEffect(() => {
     const fetchAttendance = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/attendances/recent');
+        const response = await axios.get(`${backendUrl}/api/attendances/recent`);
         if(response.data){
           const parsedData = response.data.map(item => ({
             courseName: item.course_name,

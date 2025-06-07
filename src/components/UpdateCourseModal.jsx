@@ -1,8 +1,10 @@
 // src/components/UpdateCourseModal.jsx
 import React, { useState, useEffect } from 'react';
-// No longer needed: import _isEqual from 'lodash/isEqual';
 
-const API_BASE_URL = 'http://localhost:8000/api';
+// No longer needed: import _isEqual from 'lodash/isEqual';
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+const API_BASE_URL = `${backendUrl}/api`;
 
 // --- Helper functions (keep formatTimeToAmPm, formatTimeToHHMM, getPeriodFromHHMM, formatDateToInput) ---
 const formatTimeToAmPm = (timeString_HHMM) => {

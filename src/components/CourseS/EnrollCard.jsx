@@ -4,6 +4,8 @@ import EnrollmentPeriodCard from './EnrollmentPeriodCard';
 import { useNavigate } from 'react-router-dom';
 
 const EnrollCard = ({ course, studentId, onEnrolled }) => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [loading, setLoading] = useState(false);
   const [enrolled, setEnrolled] = useState(false); // Track enrollment status
   const navigate = useNavigate(); // Hook for navigation
@@ -12,7 +14,7 @@ const EnrollCard = ({ course, studentId, onEnrolled }) => {
     try {
       setLoading(true);
       const response = await axios.post(
-        'http://localhost:8000/api/enrollments',
+        `${backendUrl}/api/enrollments`,
         {
           student_id: studentId,     // Pass student ID
           course_id: course.id,      // Pass course ID

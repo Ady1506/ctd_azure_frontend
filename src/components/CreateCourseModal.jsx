@@ -1,7 +1,9 @@
 // src/components/CreateCourseModal.jsx
 import React, { useState } from 'react';
 
-const API_BASE_URL = 'http://localhost:8000/api';
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+const API_BASE_URL = `${backendUrl}/api`;
 const CREATED_BY_ID = '644b2f5e6f2c3d4e5f123456'; // Replace with actual user ID or use auth
 
 // --- Helper Function to Format HH:MM to h:mm A ---

@@ -6,6 +6,8 @@ import CourseAttendance from '../components/AttendanceS/CourseAttendance';
 import axios from 'axios';
 
 const Attendance = () => {
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
     const [totalPercentage, setTotalPercentage] = useState(0);
     const [subjectWise, setSubjectWise] = useState({});
     const [recentAttendance, setRecentAttendance] = useState([]);
@@ -14,7 +16,7 @@ const Attendance = () => {
     useEffect(() => {
         const fetchAttendanceSummary = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/attendance/summary');
+                const response = await axios.get(`${backendUrl}/api/attendance/summary`);
                 setTotalPercentage(response.data.total_percentage);
                 setSubjectWise(response.data.subject_wise);
             } catch (error) {
@@ -24,7 +26,7 @@ const Attendance = () => {
 
         const fetchRecentAttendance = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/attendances/recent');
+                const response = await axios.get(`${backendUrl}/api/attendances/recent`);
                 const parsedData = response.data.map(item => ({
                     courseName: item.course_name,
                     markedAt: item.marked_at,

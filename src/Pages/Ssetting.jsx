@@ -14,10 +14,6 @@ const Ssetting = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        // const res = await axios.get('http://localhost:8000/api/users/current', {
-        //   withCredentials: true,
-        // });
-        // console.log('Fetched user data:', res.data);
         const res = JSON.parse(localStorage.getItem('userData'));
         console.log('Fetched user data:', res);
         setUserData({

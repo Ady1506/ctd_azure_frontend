@@ -7,12 +7,13 @@ const DashCourse = () => {
   const [courses, setCourses] = useState([]);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   // Fetch courses on mount
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const res = await axios.get('http://localhost:8000/api/courses');
+        const res = await axios.get(`${backendUrl}/api/courses`);
         setCourses(res.data);
         console.log(res.data);
       } catch (err) {

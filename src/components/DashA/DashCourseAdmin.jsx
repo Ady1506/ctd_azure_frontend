@@ -4,7 +4,9 @@ import axios from 'axios';
 import DashCourseCard from './DashCourseCard';
 import CourseDetailModal from '../CourseDetailModal'; // Import the detail modal
 
-const API_BASE_URL = 'http://localhost:8000/api';
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+const API_BASE_URL = `${backendUrl}/api`;
 
 const DashQT = () => {
     const scrollRef = useRef(null);

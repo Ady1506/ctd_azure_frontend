@@ -4,6 +4,8 @@ import axios from 'axios';
 import dayjs from 'dayjs';
 
 const CourseAttend = ({ course }) => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [recentAttendance, setRecentAttendance] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -11,7 +13,7 @@ const CourseAttend = ({ course }) => {
     const fetchRecentAttendance = async () => {
       try {
         console.log(course);
-        const response = await axios.get('http://localhost:8000/api/attendances/recent');
+        const response = await axios.get(`${backendUrl}/api/attendances/recent`);
         const parsedData = response.data.map(item => ({
           courseName: item.course_name,
           markedAt: item.marked_at,

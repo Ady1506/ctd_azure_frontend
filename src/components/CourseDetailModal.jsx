@@ -4,7 +4,9 @@ import UpdateCourseModal from './UpdateCourseModal.jsx';
 import CourseStudentsModal from './CourseStudentsModal.jsx'; 
 import NoticeModal from './NoticeModal.jsx';           
 
-const API_BASE_URL = 'http://localhost:8000/api';
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+const API_BASE_URL = `${backendUrl}/api`;
 
 const CourseDetailModal = ({ course, isOpen, onClose, onCourseAction }) => {
   const [showUpdateModal, setShowUpdateModal] = useState(false);

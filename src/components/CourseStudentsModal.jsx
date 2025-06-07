@@ -1,7 +1,9 @@
 // src/components/CourseStudentsModal.jsx
 import React, { useState, useEffect } from 'react';
 
-const API_BASE_URL = 'http://localhost:8000/api';
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+const API_BASE_URL = `${backendUrl}/api`;
 
 const CourseStudentsModal = ({ courseId, courseName, isOpen, onClose }) => {
   const [studentsData, setStudentsData] = useState([]);

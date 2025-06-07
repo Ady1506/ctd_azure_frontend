@@ -3,6 +3,8 @@ import axios from 'axios';
 import DashCourseCard from '../DashS/DashCourseCard';
 
 const CourseList = ({ selectedTab, searchTerm }) => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const itemsPerPage = 8;
   const [allCourses, setAllCourses] = useState([]);
   const [yourCourses, setYourCourses] = useState([]);
@@ -14,9 +16,10 @@ const CourseList = ({ selectedTab, searchTerm }) => {
     const fetchCourses = async () => {
       setIsLoading(true);
       try {
-        const allCoursesPromise = axios.get('http://localhost:8000/api/courses');
-        const enrolledCoursesPromise = axios.get('http://localhost:8000/api/enrollments/courses');
+        const allCoursesPromise = axios.get(`${backendUrl}/api/courses`);
         
+        const enrolledCoursesPromise = axios.get(`${backendUrl}/api/enrollments/courses`);
+
         const [allResponse, enrolledResponse] = await Promise.all([allCoursesPromise, enrolledCoursesPromise]);
 
         setAllCourses(allResponse.data || []);

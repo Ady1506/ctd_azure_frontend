@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 
 const EnrolledCoursesModal = ({ studentId, isOpen, onClose }) => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [coursesData, setCoursesData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -15,7 +17,7 @@ const EnrolledCoursesModal = ({ studentId, isOpen, onClose }) => {
             setCoursesData([]);
     
             try {
-              const apiUrl = `http://localhost:8000/api/admin/student-details?student_id=${studentId}`;
+              const apiUrl = `${backendUrl}/api/admin/student-details?student_id=${studentId}`;
               const response = await fetch(apiUrl, {
                 credentials: 'include' // Add this line
               });

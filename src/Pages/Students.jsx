@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import StudentCard from '../components/StudentCard';    // Adjust path if needed
 import StudentModal from '../components/StudentModal'; // Adjust path if needed
 
-const API_BASE_URL = 'http://localhost:8000/api'; // Configure your API base URL
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+const API_BASE_URL = `${backendUrl}/api`;
 
 const Students = () => {
   const [students, setStudents] = useState([]); // State to hold only student users

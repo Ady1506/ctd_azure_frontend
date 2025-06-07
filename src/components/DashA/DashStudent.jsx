@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const DashStudent = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const navigate = useNavigate();
   const [students, setStudents] = useState([]); // State for student data
   const [loading, setLoading] = useState(true);
@@ -18,7 +20,7 @@ const DashStudent = () => {
 
       try {
         // Fetch users with credentials included
-        const response = await axios.get('http://localhost:8000/api/users', {
+        const response = await axios.get(`${backendUrl}/api/users`, {
           withCredentials: true,
         });
 

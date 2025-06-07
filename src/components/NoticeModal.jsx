@@ -1,7 +1,9 @@
 // src/components/NoticeModal.jsx
 import React, { useState, useEffect, useCallback } from 'react';
 
-const API_BASE_URL = 'http://localhost:8000/api';
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+const API_BASE_URL = `${backendUrl}/api`;
 
 const PaperclipIcon = ({ className = "h-5 w-5" }) => (
   <svg

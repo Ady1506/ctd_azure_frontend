@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 const Profo = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [userName, setUserName] = useState('');
   const navigate = useNavigate();
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get('http://localhost:8000/api/users/current', {
+        const res = await axios.get(`${backendUrl}/api/users/current`, {
           withCredentials: true,
         });
         console.log('Fetched data:', res.data);

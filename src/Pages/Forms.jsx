@@ -5,7 +5,9 @@ import CourseDetailModal from '../components/CourseDetailModal';
 import CreateCourseModal from '../components/CreateCourseModal.jsx';
 import CourseArchiveDetailModal from '../components/CourseArchiveDetailModal';
 
-const API_BASE_URL = 'http://localhost:8000/api';
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+const API_BASE_URL = `${backendUrl}/api`;
 
 const Forms = () => {
     const [courses, setCourses] = useState([]);

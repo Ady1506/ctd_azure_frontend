@@ -4,6 +4,8 @@ import axios from 'axios';
 import dayjs from 'dayjs';
 
 const DashNotice = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [expanded, setExpanded] = useState(false);
   const [viewAll, setViewAll] = useState(false);
   const [selectedNotice, setSelectedNotice] = useState(null);
@@ -12,8 +14,8 @@ const DashNotice = () => {
   useEffect(() => {
     const fetchNotices = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/admin/notices',{
-            withCredentials: true 
+        const response = await axios.get(`${backendUrl}/api/admin/notices`, {
+          withCredentials: true
         });
         const formattedNotices = response.data.map((notice) => {
           const createdAt = dayjs(notice.created_at);

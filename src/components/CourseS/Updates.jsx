@@ -3,13 +3,15 @@ import UpdatesCard from './UpdatesCard';
 import axios from 'axios';
 
 const Updates = ({ course }) => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [notices, setNotices] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchNotices = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/notices/enrolled');
+        const response = await axios.get(`${backendUrl}/api/notices/enrolled`);
         const filteredNotices = response.data.filter(notice => notice.course_id === course.id);
         setNotices(filteredNotices);
       } catch (error) {
