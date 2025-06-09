@@ -1,20 +1,24 @@
-FROM node:18 
+# Stage 1: Build Vite app
+FROM node:18 AS builder
 
-# Set working directory
 WORKDIR /app
 
-# Copy package.json and install dependencies
 COPY package*.json ./
 RUN npm install
 
-# Copy all source code
 COPY . .
+RUN npm run build  # Builds into /app/dist
 
-# Expose the Vite dev server port
-EXPOSE 5173
+# Stage 2: Serve with Nginx
+FROM nginx:alpine
 
-# Set environment variables if needed
-ENV HOST=0.0.0.0
+# Copy built files from builder to Nginx public dir
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Start Vite dev server
-CMD ["npm", "run", "dev"]
+# Optional: Custom Nginx config (to support SPA routing)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Expose port 80 for Azure
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
