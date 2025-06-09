@@ -29,6 +29,8 @@ jobs:
           push: true
           tags: index.docker.io/${{ secrets.DOCKER_USERNAME }}/ctd-azure-frontend:${{ github.sha }}
           file: ./Dockerfile
+          build-args: |
+            VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}
 
   deploy:
     runs-on: ubuntu-latest
